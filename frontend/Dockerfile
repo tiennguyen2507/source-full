@@ -26,5 +26,5 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 
 EXPOSE 3000
-CMD ["npm", "run", "start", "--", "-p", "3000", "-H", "0.0.0.0"]
+CMD ["sh", "-c", "npm run start -- -p \"${PORT:-3000}\" -H 0.0.0.0"]
 

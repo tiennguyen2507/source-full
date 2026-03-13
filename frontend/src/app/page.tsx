@@ -5,7 +5,8 @@ type Todo = {
 };
 
 async function getTodos(): Promise<Todo[]> {
-  const res = await fetch("http://backend:3001/todos", {
+  const apiBaseUrl = process.env.API_BASE_URL ?? "http://backend:3001";
+  const res = await fetch(`${apiBaseUrl}/todos`, {
     // Luôn gọi backend thật, không dùng cache của Next
     cache: "no-store",
   });
@@ -37,7 +38,7 @@ export default async function Home() {
           <p className="text-sm text-zinc-600 dark:text-zinc-400">
             Dữ liệu được lấy từ API NestJS tại{" "}
             <code className="rounded bg-zinc-100 px-2 py-1 font-mono text-xs dark:bg-zinc-900">
-              GET http://backend:3001/todos
+              GET {process.env.API_BASE_URL ?? "http://backend:3001"}/todos
             </code>{" "}
             thông qua server component của Next.js.
           </p>
